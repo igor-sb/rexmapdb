@@ -54,7 +54,7 @@ num_urls = len(queue)
 num_conn = min(num_conn, num_urls)
 assert 1 <= num_conn <= 10000, "invalid number of concurrent connections"
 log("PycURL %s (compiled against 0x%x)" % (pycurl.version, pycurl.COMPILE_LIBCURL_VERSION_NUM))
-log("----- Getting", num_urls, "URLs using", num_conn, "connections -----")
+log("----- Getting" + str(num_urls) + "URLs using" + str(num_conn) + "connections -----")
 
 
 # Pre-allocate a list of curl objects
