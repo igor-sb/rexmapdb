@@ -11,6 +11,7 @@ biopython = "^1.81"
 numpy = "^1.25.1"
 pandas = "^2.0.3"
 six = "^1.16.0"
+fire = "^0.5.0"
 
 [tool.poetry.dev-dependencies]
 

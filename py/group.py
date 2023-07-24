@@ -19,15 +19,12 @@ from _include import log
 script_title = 'Group unique sequences.'
 
 
-#%% Table processor
-
 def table_to_dict (table_filename):
     """ Load table with the information on v4 region copy number for each
     unique strain. """
     tab = pd.read_csv(table_filename, sep='\t', usecols=[1,2])
     return tab.set_index('variant_name').to_dict()['count']
 
-#%% Species text 
 def species_from_strain (strain_name, delim='_', out_delim='_', na_list=['sp.', 'bacterium']):
     """ Extract species from strain name. Use the first
     two fields separated by delim. """
@@ -63,13 +60,7 @@ def dict_to_fasta (d, out_fasta, out_table):
 
 #%% Main
 def main(table_filename, fasta_filename, table_output, fasta_output):
-    # fasta_filename = '/Users/igor/cloud/research/microbiome/genomes/data/vregions_db/V3-V4_337F-805R_hang22_sequences.fasta'
-    # table_filename = '/Users/igor/cloud/research/microbiome/genomes/data/vregions_db/16s_from_genomes_2017-07-20_V3-V4_337F-805R_hang22_counts.txt'
-    # fasta_output = '/Users/igor/cloud/research/microbiome/genomes/data/vregions_db/V3-V4_337F-805R_hang22_unique_sequences.fasta'
-    # table_output = '/Users/igor/cloud/research/microbiome/genomes/data/vregions_db/V3-V4_337F-805R_hang22_unique_sequences_table.txt'
-    #%% Load table
     counts = table_to_dict(table_filename)
-    #%% FASTA processor
     def fasta_to_seq_dict (fasta_filename, maxN=1):
         """ Load fasta_filename line by line into a dictionary. The
         sequences are going to be dictionary keys and meta-name 
@@ -107,9 +98,7 @@ def main(table_filename, fasta_filename, table_output, fasta_output):
             if seq != '':
                 store_entry()
         return d
-    #%% Load FASTA
     d = fasta_to_seq_dict(fasta_filename)
-    #%% Write output
     dict_to_fasta(d, fasta_output, table_output)
 
 
